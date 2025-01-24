@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mio Indirizzo IP</title>
+    <script>
+        async function getIP() {
+            try {
+                let response = await fetch('https://api64.ipify.org?format=json');
+                let data = await response.json();
+                document.getElementById("ip-address").textContent = data.ip;
+            } catch (error) {
+                document.getElementById("ip-address").textContent = "Errore nel recupero dell'IP";
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff758c, #ffb199);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            animation: backgroundFade 8s infinite alternate;
+        }
+        
+        @keyframes backgroundFade {
+            0% { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
+            100% { background: linear-gradient(135deg, #ffb199, #ff758c); }
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out, glow 1.5s infinite alternate;
+        }
+        
+        p {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 25px 50px;
+            border-radius: 30px;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.5s ease-in-out, pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.08);
+            }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+            }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 2s ease-in-out;
+        }
+    </style>
+</head>
+<body onload="getIP()">
+    <div class="container">
+        <h1>Il tuo indirizzo IP è:</h1>
+        <p id="ip-address">Caricamento...</p>
+    </div>
+</body>
+</html>
